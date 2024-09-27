@@ -10,6 +10,7 @@ let lastPaintTime = 0;
 let snakeArr = [{ x: 13, y: 15 }];
 let food = { x: 6, y: 7 };
 let audioEnabled = false;
+let hiscoreval = 0; // Default high score value
 
 // Game Functions
 function main(ctime) {
@@ -98,7 +99,6 @@ window.addEventListener('keydown', e => {
         audioEnabled = true;
     }
 
-    inputDir = { x: 0, y: 1 }; // Start the game
     moveSound.play();
     switch (e.key) {
         case "ArrowUp":
@@ -136,6 +136,7 @@ window.addEventListener('touchend', e => {
     let diffX = touchEndX - touchStartX;
     let diffY = touchEndY - touchStartY;
 
+    // Swipe detection
     if (Math.abs(diffX) > Math.abs(diffY)) {
         // Horizontal swipe
         if (diffX > 0) {
@@ -158,12 +159,9 @@ window.addEventListener('touchend', e => {
 // Function to enable audio on first interaction (required for mobile)
 function enableAudioOnFirstInteraction() {
     // Play and pause each audio to unlock it for mobile
-    foodSound.play();
-    foodSound.pause();
-    gameOverSound.play();
-    gameOverSound.pause();
-    moveSound.play();
-    moveSound.pause();
-    musicSound.play();
-    musicSound.pause();
+    [foodSound, gameOverSound, moveSound, musicSound].forEach(sound => {
+        sound.play();
+        sound.pause();
+        sound.currentTime = 0; // Reset time after pause
+    });
 }
