@@ -145,14 +145,56 @@ window.addEventListener('touchend', e => {
     }
 });
 // Load your audio files
-const foodSound = new Audio('El_Risitas_Laugh_Meme_template_5_Sec.mp3');
-const gameOverSound = new Audio('Man_Screaming_I_Sound_Effect.mp3');
-const moveSound = new Audio('move.mp3');
-const musicSound = new Audio('12_saal_bilal_saeed_lyrics.mp3');
+const foodSound = new Audio('https://your-server-url/path/El_Risitas_Laugh_Meme_template_5_Sec.mp3');
+const gameOverSound = new Audio('https://your-server-url/path/Man_Screaming_I_Sound_Effect.mp3');
+const moveSound = new Audio('https://your-server-url/path/move.mp3');
+const musicSound = new Audio('https://your-server-url/path/12_saal_bilal_saeed_lyrics.mp3');
 
-// Function to enable audio playback
+// Mobile touch event listeners (for touch devices)
+let touchStartX = 0, touchStartY = 0;
+let audioEnabled = false;
+
+window.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+
+    // Enable audio playback on first touch (required for mobile)
+    if (!audioEnabled) {
+        enableAudioOnTouch();
+        audioEnabled = true;
+    }
+});
+
+window.addEventListener('touchend', e => {
+    let touchEndX = e.changedTouches[0].clientX;
+    let touchEndY = e.changedTouches[0].clientY;
+
+    let diffX = touchEndX - touchStartX;
+    let diffY = touchEndY - touchStartY;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal swipe
+        if (diffX > 0) {
+            inputDir = { x: 1, y: 0 }; // Right swipe
+        } else {
+            inputDir = { x: -1, y: 0 }; // Left swipe
+        }
+    } else {
+        // Vertical swipe
+        if (diffY > 0) {
+            inputDir = { x: 0, y: 1 }; // Down swipe
+        } else {
+            inputDir = { x: 0, y: -1 }; // Up swipe
+        }
+    }
+
+    // Play move sound on swipe
+    moveSound.play();
+});
+
+// Function to enable audio on touch (required for mobile browsers)
 function enableAudioOnTouch() {
-    // Play and pause each audio file to unlock playback on mobile
+    // Play and pause each audio to unlock it for mobile
     foodSound.play();
     foodSound.pause();
     gameOverSound.play();
@@ -161,11 +203,4 @@ function enableAudioOnTouch() {
     moveSound.pause();
     musicSound.play();
     musicSound.pause();
-    
-    // Remove the event listener after audio is enabled
-    document.removeEventListener('touchstart', enableAudioOnTouch);
 }
-
-// Add an event listener for touch events to enable audio
-document.addEventListener('touchstart', enableAudioOnTouch, { once: true });
-
