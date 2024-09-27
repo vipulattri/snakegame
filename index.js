@@ -1,7 +1,7 @@
 // Initialize game variables
 let inputDir = { x: 0, y: 0 };
-const foodSound = new Audio('El_Risitas_Laugh_Meme_template_5_Sec.mp3');
-const gameOverSound = new Audio('Man_Screaming_I_Sound_Effect.mp3');
+const foodSound = new Audio('El_Risitas_Laugh_Meme_template_5_Sec_[_YouConvert.net_].mp3');
+const gameOverSound = new Audio('Man Screaming I Sound Effect.mp3');
 const moveSound = new Audio('move.mp3');
 const musicSound = new Audio('12_saal_bilal_saeed_lyrics.mp3');
 let speed = 19;
