@@ -144,3 +144,28 @@ window.addEventListener('touchend', e => {
         }
     }
 });
+// Load your audio files
+const foodSound = new Audio('El_Risitas_Laugh_Meme_template_5_Sec.mp3');
+const gameOverSound = new Audio('Man_Screaming_I_Sound_Effect.mp3');
+const moveSound = new Audio('move.mp3');
+const musicSound = new Audio('12_saal_bilal_saeed_lyrics.mp3');
+
+// Function to enable audio playback
+function enableAudioOnTouch() {
+    // Play and pause each audio file to unlock playback on mobile
+    foodSound.play();
+    foodSound.pause();
+    gameOverSound.play();
+    gameOverSound.pause();
+    moveSound.play();
+    moveSound.pause();
+    musicSound.play();
+    musicSound.pause();
+    
+    // Remove the event listener after audio is enabled
+    document.removeEventListener('touchstart', enableAudioOnTouch);
+}
+
+// Add an event listener for touch events to enable audio
+document.addEventListener('touchstart', enableAudioOnTouch, { once: true });
+
