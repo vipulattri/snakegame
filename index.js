@@ -1,6 +1,6 @@
 let inputDir = { x: 0, y: 0 };
-const foodSound = new Audio('food.mp3');
-const gameOverSound = new Audio('gameover.mp3');
+const foodSound = new Audio('El_Risitas_Laugh_Meme_template_5_Sec_[_YouConvert.net_].mp3');
+const gameOverSound = new Audio('Man Screaming I Sound Effect.mp3');
 const moveSound = new Audio('move.mp3');
 const musicSound = new Audio('12_saal_bilal_saeed_lyrics_[_YouConvert.net_].mp3');
 let speed = 19;
@@ -36,7 +36,7 @@ function gameEngine() {
         gameOverSound.play();
         musicSound.pause();
         inputDir = { x: 0, y: 0 };
-        alert("Game Over! Try Again!");
+        alert("Pyar me aadmi andha hota hai !Abhishek bhi tha !");
         snakeArr = [{ x: 13, y: 15 }];
         musicSound.play();
         score = 0;
